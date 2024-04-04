@@ -14,6 +14,7 @@ const Login = () => {
   const [res, setRes] = useState(null);
   const email = useRef();
   const password = useRef();
+  const name = useRef();
   const navigate = useNavigate();
   const scrollToForm = () => {
     const formElement = document.getElementById("loginForm");
@@ -30,7 +31,8 @@ const Login = () => {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value
+        password.current.value,
+        name.current.value
       )
         .then((userCredential) => {
           // Signed up
@@ -90,10 +92,7 @@ const Login = () => {
         id="loginForm"
         className="h-screen bg-black flex flex-row justify-center items-center relative"
       >
-        <form
-          action=""
-          className="bg-red-600 bg-opacity-50 p-8 rounded w-full md:w-128"
-        >
+        <form action="" className="bg-red-600 bg-opacity-50 p-8 rounded w-96">
           <h1
             className="text-white text-3xl font-bold mb-4"
             style={{ fontFamily: "fantasy" }}
@@ -102,6 +101,7 @@ const Login = () => {
           </h1>
           {signin && (
             <input
+              ref={name}
               type="text"
               placeholder="Full Name"
               className="p-3 w-full rounded mb-4 bg-white"
@@ -133,7 +133,7 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <div className="text-white text-center mt-4 w-full md:w-128 p-10">
+        <div className="text-white text-center mt-4  w-96 p-10">
           <h1
             className="text-5xl font-bold mb-5"
             style={{ fontFamily: "fantasy" }}
