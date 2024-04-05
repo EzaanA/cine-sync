@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
-import { useState } from "react";
-import { useRef } from "react";
-import validate from "../utils/loginvalidate";
 import { useNavigate } from "react-router-dom";
 import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "../utils/firebase";
+
+// Assuming a simple validate function
+const validate = (email, password) => {
+  if (!email || !password) {
+    return "Email and password are required.";
+  }
+  return null;
+};
+
 const Login = () => {
-  const [signin, setsignin] = useState(true);
+  const [signin, setSignin] = useState(true);
   const [res, setRes] = useState(null);
   const email = useRef();
   const password = useRef();
   const name = useRef();
   const navigate = useNavigate();
+
   const scrollToForm = () => {
     const formElement = document.getElementById("loginForm");
     if (formElement) {
@@ -23,28 +31,41 @@ const Login = () => {
     }
   };
 
-  const validatesignin = (event) => {
+  const handleSignin = (event) => {
     event.preventDefault();
-    const res = validate(email.current.value, password.current.value);
-    setRes(res);
+    const validationResult = validate(
+      email.current.value,
+      password.current.value
+    );
+    if (validationResult) {
+      setRes(validationResult);
+      return;
+    }
+    setRes(null);
+
     if (signin) {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value,
-        name.current.value
+        password.current.value
       )
         .then((userCredential) => {
-          // Signed up
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
-          // ...
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              console.log(user);
+              navigate("/browse");
+            })
+            .catch((error) => {
+              console.error("Error updating profile:", error);
+            });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
+          console.error("Error creating user:", error);
+          setRes(error.message);
         });
     } else {
       signInWithEmailAndPassword(
@@ -53,35 +74,32 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
           console.log(user);
           navigate("/browse");
-          // ...
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setRes(errorMessage);
+          console.error("Error signing in:", error);
+          setRes(error.message);
         });
     }
   };
-  const handlesignin = (event) => {
-    event.preventDefault();
-    setsignin(!signin);
+
+  const toggleSignin = () => {
+    setSignin(!signin);
   };
 
   return (
     <>
       <div className="absolute">
-        <Header></Header>
+        <Header />
       </div>
       <div className="bg-black h-screen flex flex-col justify-center items-center">
         <div className="absolute">
           <img src="src/assets/bg-img1.jpeg" alt="" className="h-screen" />
         </div>
         <button
-          className=" bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded absolute animate-bounce mt-96"
+          className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded absolute animate-bounce mt-96"
           onClick={scrollToForm}
         >
           Get Started
@@ -122,25 +140,25 @@ const Login = () => {
           {res && <p className="text-red-500 text-sm mt-1">{res}</p>}
           <button
             className="p-4 w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded"
-            onClick={validatesignin}
+            onClick={handleSignin}
           >
             {signin ? "Sign Up" : "Sign In"}
           </button>
           <div className="text-white text-center mt-4">
             <p>{signin ? "Already registered" : "Don't have an account?"}</p>
-            <button className="text-blue-400" onClick={handlesignin}>
+            <button className="text-blue-400" onClick={toggleSignin}>
               {signin ? "Sign In" : "Sign Up"}
             </button>
           </div>
         </form>
-        <div className="text-white text-center mt-4  w-96 p-10">
+        <div className="text-white text-center mt-4 w-96 p-10">
           <h1
             className="text-5xl font-bold mb-5"
             style={{ fontFamily: "fantasy" }}
           >
             cine-sync
           </h1>
-          <h2 className="text-3xl" style={{ fontFamily: "fantasy" }}>
+          <h2 className="text-3xl">
             Save your favourites easily and always have something to watch.
           </h2>
         </div>
