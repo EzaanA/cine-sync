@@ -85,8 +85,9 @@ const Login = () => {
     }
   };
 
-  const toggleSignin = () => {
+  const toggleSignin = (event) => {
     setSignin(!signin);
+    event.preventDefault();
   };
 
   return (

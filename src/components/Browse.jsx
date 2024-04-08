@@ -1,5 +1,5 @@
 import Header from "./Header";
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -18,9 +18,25 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "../utils/firebase";
+import { API_OPTIONS } from "../utils/constants";
+import { addNowPlayingMovies } from "../utils/movieSlice";
+import MainContainer from "./MainContainer";
 const Browse = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const getPlayingMovies = async () => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/movie/now_playing?page=1",
+      API_OPTIONS
+    );
+    const json = await data.json();
+    dispatch(addNowPlayingMovies(json.results));
+  };
+
+  useEffect(() => {
+    getPlayingMovies();
+  }, []);
 
   const handlesignout = () => {
     signOut(auth)
@@ -32,7 +48,6 @@ const Browse = () => {
         navigate("/error");
       });
   };
-
   return (
     <>
       <div className=" flex justify-between bg-gradient-to-b from-black to-gray-500 bg-transparent h-12">
@@ -52,6 +67,7 @@ const Browse = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      <MainContainer></MainContainer>
     </>
   );
 };
