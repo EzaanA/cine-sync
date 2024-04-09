@@ -1,5 +1,4 @@
 import Header from "./Header";
-import React, { useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -10,36 +9,18 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { removeUser } from "../utils/userSlice";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {
-  auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "../utils/firebase";
-import { API_OPTIONS } from "../utils/constants";
-import { addNowPlayingMovies } from "../utils/movieSlice";
+import { auth, signOut } from "../utils/firebase";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+import usePlayingNow from "../utils/hooks/usePlayingNow";
+import usePopularMovies from "../utils/hooks/usePopularMovies";
+import useTopRatedMovies from "../utils/hooks/useTopRatedMovies";
+import useUpcomingMovies from "../utils/hooks/useUpcomingMovies";
 const Browse = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const getPlayingMovies = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?page=1",
-      API_OPTIONS
-    );
-    const json = await data.json();
-    dispatch(addNowPlayingMovies(json.results));
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    getPlayingMovies();
-  }, []);
-
+  usePlayingNow();
+  usePopularMovies();
+  useTopRatedMovies();
+  useUpcomingMovies();
   const handlesignout = () => {
     signOut(auth)
       .then(() => {

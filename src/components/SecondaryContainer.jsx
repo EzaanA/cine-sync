@@ -11,16 +11,13 @@ const SecondaryContainer = () => {
           movies={movies.nowPlayingMovies}
         ></MovieList>
         <MovieList
-          title={"Trending"}
-          movies={movies.nowPlayingMovies}
+          title={"Top Rated"}
+          movies={movies.topRatedMovies}
         ></MovieList>
+        <MovieList title={"Popular"} movies={movies.popularMovies}></MovieList>
         <MovieList
-          title={"new releases"}
-          movies={movies.nowPlayingMovies}
-        ></MovieList>
-        <MovieList
-          title={"Now Playing"}
-          movies={movies.nowPlayingMovies}
+          title={"Upcoming Movies"}
+          movies={movies.upcomingMovies}
         ></MovieList>
       </div>
     </div>
