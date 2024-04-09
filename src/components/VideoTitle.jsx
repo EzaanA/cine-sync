@@ -14,7 +14,7 @@ const VideoTitle = ({ title, overview }) => {
           ▷ Play
         </Button>
         <Button size="lg" className=" hover:opacity-80">
-          ⓘ more info
+          more info
         </Button>
       </div>
     </div>
