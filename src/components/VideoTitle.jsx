@@ -3,15 +3,17 @@ import { Button } from "@/components/ui/button";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className=" ml-2">
-      <h1 className=" text-3xl font-bold m-4">{title}</h1>
-      <p className=" text-lg w-1/5 p-4">{overview}</p>
+    <div className=" absolute bg-gradient-to-r from-black w-screen aspect-video pt-[15%] px-20">
+      <h1 className=" text-3xl font-bold m-4 text-white">{title}</h1>
+      <p className=" text-lg w-1/5 p-4 text-white">{overview}</p>
       <div>
-        <Button size="lg" className=" mr-4">
-          {" "}
+        <Button
+          size="lg"
+          className="mr-4 bg-white text-black hover:bg-gray-300 hover:text-gray-800"
+        >
           ▷ Play
         </Button>
-        <Button variant="outline" size="lg">
+        <Button size="lg" className=" hover:opacity-80">
           ⓘ more info
         </Button>
       </div>

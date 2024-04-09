@@ -50,22 +50,26 @@ const Browse = () => {
   };
   return (
     <>
-      <div className=" flex justify-between bg-gradient-to-b from-black to-gray-500 bg-transparent h-12">
-        <Header></Header>
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem onClick={handlesignout}>logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="absolute bg-transparent w-full">
+        <div className=" flex justify-between">
+          <Header></Header>
+          <DropdownMenu size="lg">
+            <DropdownMenuTrigger>
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem onClick={handlesignout}>
+                logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <MainContainer></MainContainer>
     </>

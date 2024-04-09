@@ -21,7 +21,7 @@ const Header = () => {
   }, [navigate]);
 
   return (
-    <div>
+    <div className=" z-50">
       <img src="src/assets/logo1.png" alt="logo" className="w-24 md:w-48 p-2" />
     </div>
   );
