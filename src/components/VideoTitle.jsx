@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className=" absolute bg-gradient-to-r from-black w-screen aspect-video pt-[15%] px-20">
+    <div className=" absolute bg-gradient-to-r from-black w-screen aspect-auto h-screen pt-[15%] px-20">
       <h1 className=" text-3xl font-bold m-4 text-white">{title}</h1>
       <p className=" text-lg w-1/5 p-4 text-white">{overview}</p>
       <div>
