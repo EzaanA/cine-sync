@@ -36,6 +36,7 @@ const Browse = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getPlayingMovies();
   }, []);
 

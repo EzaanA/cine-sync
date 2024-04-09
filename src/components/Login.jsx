@@ -114,7 +114,7 @@ const Login = () => {
         <form action="" className="bg-red-600 bg-opacity-50 p-8 rounded w-96">
           <h1
             className="text-white text-3xl font-bold mb-4"
-            style={{ fontFamily: "fantasy" }}
+            style={{ fontFamily: "monospace" }}
           >
             {signin ? "Sign Up" : "Sign In"}
           </h1>
@@ -155,7 +155,7 @@ const Login = () => {
         <div className="text-white text-center mt-4 w-96 p-10">
           <h1
             className="text-5xl font-bold mb-5"
-            style={{ fontFamily: "fantasy" }}
+            style={{ fontFamily: "monospace" }}
           >
             cine-sync
           </h1>
