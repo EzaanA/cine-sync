@@ -50,7 +50,7 @@ const Browse = () => {
   };
   return (
     <>
-      <div className="absolute bg-transparent w-full">
+      <div className="absolute bg-transparent w-full z-50">
         <div className=" flex justify-between">
           <Header></Header>
           <DropdownMenu size="lg">
