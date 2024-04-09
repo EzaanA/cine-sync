@@ -21,6 +21,7 @@ import {
 import { API_OPTIONS } from "../utils/constants";
 import { addNowPlayingMovies } from "../utils/movieSlice";
 import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
 const Browse = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const Browse = () => {
         </div>
       </div>
       <MainContainer></MainContainer>
+      <SecondaryContainer></SecondaryContainer>
     </>
   );
 };
