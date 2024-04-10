@@ -18,7 +18,6 @@ import usePlayingNow from "../utils/hooks/usePlayingNow";
 import usePopularMovies from "../utils/hooks/usePopularMovies";
 import useTopRatedMovies from "../utils/hooks/useTopRatedMovies";
 import useUpcomingMovies from "../utils/hooks/useUpcomingMovies";
-import GptSearch from "./GptSearch";
 
 const Browse = () => {
   const [click, setClick] = useState(false);
@@ -48,12 +47,6 @@ const Browse = () => {
         <div className=" flex justify-between p-2">
           <Header></Header>
           <div className=" flex">
-            <Button
-              className=" mr-2 hover:opacity-80"
-              onClick={handleGptSearchClick}
-            >
-              GPT Search
-            </Button>
             <DropdownMenu size="lg">
               <DropdownMenuTrigger>
                 <Avatar>
@@ -70,14 +63,9 @@ const Browse = () => {
           </div>
         </div>
       </div>
-      {click ? (
-        <GptSearch></GptSearch>
-      ) : (
-        <>
-          <MainContainer></MainContainer>
-          <SecondaryContainer></SecondaryContainer>
-        </>
-      )}
+
+      <MainContainer></MainContainer>
+      <SecondaryContainer></SecondaryContainer>
     </>
   );
 };
