@@ -16,9 +16,6 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_API_KEY,
@@ -30,8 +27,8 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_APP_MEASUREMENT_ID,
 };
 
-
-
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 // Get the Auth instance for the initialized Firebase app
 const auth = getAuth(app);
 
